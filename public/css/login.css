@@ -1,0 +1,41 @@
+.t3 {
+  font-size: 2rem;
+  color: var(--color-text);
+  margin: 0rem 1rem;
+  font-family: var(--font-main);
+  line-height: 1.4;
+  font-weight: 400;
+  user-select: none;
+}
+.area {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+
+  padding: 2rem;
+  margin: auto;
+
+  max-width: 600px;
+  min-height: none;
+  background-color: #d8dfe5;
+}
+
+.ad {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  margin: 0.2rem 1rem;
+  font-family: var(--font-smain);
+  line-height: 1.4;
+  max-width: 31ch;
+  word-wrap: break-word;
+  text-decoration: none;
+  text-align: center;
+  transition: background 1s ease;
+  user-select: none;
+}
+
+.ad:hover {
+  background-color: #f0fdff;
+}

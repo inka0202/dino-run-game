@@ -1,0 +1,66 @@
+@font-face {
+  font-family: "Jersey 25";
+  font-weight: 400;
+  src: url("/public/fonts/Jersey/jersey-25-v3-latin-regular.woff2")
+    format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+@font-face {
+  font-family: "Underdog";
+  font-weight: 400;
+  src: url("/public/fonts/Underdog/underdog-v23-latin-regular.woff2")
+    format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+body {
+  background: url("/public/assets/images/coners.png") no-repeat center center
+    fixed;
+  background-size: cover;
+  align-items: center;
+  text-align: center;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+
+  flex-direction: column;
+  margin: 1.5em;
+  padding: 1em;
+}
+
+#score-container {
+  position: absolute;
+  display: flow-root;
+  flex-direction: row;
+  font-size: 1.9rem;
+  color: #000000;
+  font-family: "Underdog";
+  font-weight: bold;
+  margin: 2.5rem;
+}
+#score {
+  font-weight: 900;
+}
+
+#game-container canvas {
+  display: block;
+}
+.info {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 800px;
+  text-align: center;
+}
+#j {
+  font-family: "Jersey 25";
+  font-size: 2.4rem;
+  line-height: 1;
+  margin: 0.5rem 2rem 2.5rem;
+}
+#u {
+  font-family: "Underdog";
+  font-size: 1.5rem;
+  line-height: 1;
+  margin: 2.5rem 2rem 0.5rem;
+}

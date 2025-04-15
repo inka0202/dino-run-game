@@ -1,0 +1,31 @@
+.w {
+  font-weight: 400;
+  font-size: 3.1em;
+  line-height: 1;
+  max-width: 15ch;
+  word-wrap: break-word;
+  margin: 1rem;
+  font-family: var(--font-main);
+}
+.mode_b {
+  font-family: var(--font-main);
+  font-size: 2.5rem;
+  width: 70%;
+
+  font-family: "Jersey 25";
+  font-style: normal;
+  font-weight: 400;
+  user-select: none;
+  margin: 2.9rem 1rem 0.5rem;
+  align-items: center;
+  text-align: center;
+}
+.t2 {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  margin: 0rem 1rem;
+  font-family: var(--font-smain);
+  line-height: 1.4;
+  max-width: 31ch;
+  word-wrap: break-word;
+}

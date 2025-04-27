@@ -3,13 +3,19 @@ let gravity = 1.1;
 let jumpForce = -18.5;
 let groundY;
 let obstacles = [];
+
 let score = 0;
 let scoreEl;
+let highScore = 0;
+let highScoreEl;
+
 let dImg;
 let cImg;
-let gameStarted = false;
 let fontC;
+
+let gameStarted = false;
 let gameOver = false;
+let lastScoreTime = 0;
 
 function setup() {
   const canvas = createCanvas(800, 300);
@@ -21,6 +27,7 @@ function setup() {
   obstacles.push(new Obstacle());
 
   scoreEl = document.getElementById("score");
+  highScoreEl = document.getElementById("highscore");
 }
 
 function draw() {
@@ -54,22 +61,44 @@ function draw() {
       gameOver = true;
       noLoop();
       console.log("Game Over");
+
+      fill(59, 85, 93);
+      textAlign(CENTER);
+      textSize(34);
+      textFont("underdog");
+      text("GAME OVER", width / 2, height / 2);
+      fill(0);
+      text("GAME OVER", width / 2 - 2, height / 2 - 2);
+      text("GAME OVER", width / 2 + 2, height / 2 + 2);
+      if (score > highScore) {
+        highScore = score;
+        highScoreEl.innerText = "HI " + highScore.toString().padStart(5, "0");
+      }
+      return;
     }
   }
 
   // Score update
-  score += 1;
-  scoreEl.innerText = score;
+
+  function formatScore(score) {
+    return score.toString().padStart(5, "0");
+  }
+  if (millis() - lastScoreTime > 95) {
+    //every 100 ms
+    score += 1;
+    scoreEl.innerText = formatScore(score);
+    lastScoreTime = millis();
+  }
 }
 function keyPressed() {
   if (key === " " || key === "ArrowUp") {
     if (!gameStarted) {
       gameStarted = true;
-      obstacles.push(new Obstacle()); // перша перешкода
+      obstacles.push(new Obstacle()); // the first obstacle
       return;
     }
     if (gameOver) {
-      restartGame(); // Якщо гра закінчена, перезапускаємо її
+      restartGame(); // If the game is over, restart it
       return;
     }
     dino.jump();
@@ -79,6 +108,7 @@ function restartGame() {
   // Скидаємо все і починаємо нову гру
   gameOver = false;
   score = 0;
+  scoreEl.innerText = score.toString().padStart(5, "0");
   obstacles = [];
   dino = new Dino();
   loop(); // Поновлюємо гру
@@ -117,14 +147,14 @@ class Dino {
 
   hits(obstacle) {
     return collideRectRect(
-      this.x,
-      this.y,
-      this.r,
-      this.r,
-      obstacle.x,
-      obstacle.y,
-      obstacle.w,
-      obstacle.h
+      this.x + 10,
+      this.y + 10,
+      this.r - 20,
+      this.h - 20,
+      obstacle.x + 5,
+      obstacle.y + 5,
+      obstacle.w - 10,
+      obstacle.h - 10
     );
   }
 }

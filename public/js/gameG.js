@@ -17,6 +17,12 @@ let gameStarted = false;
 let gameOver = false;
 let lastScoreTime = 0;
 
+let obstacleTimer = 0;
+let nextObstacleDistance = 0;
+let gameSpeed = 6;
+let maxSpeed = 100;
+let speedIncreaseRate = 0.001;
+
 function setup() {
   const canvas = createCanvas(800, 300);
   canvas.parent("game-container");
@@ -24,10 +30,10 @@ function setup() {
 
   dino = new Dino();
 
-  obstacles.push(new Obstacle());
-
   scoreEl = document.getElementById("score");
   highScoreEl = document.getElementById("highscore");
+
+  resetObstacleSpawn();
 }
 
 function draw() {
@@ -37,8 +43,8 @@ function draw() {
   fill(59, 85, 93);
   noStroke();
   rect(0, groundY, width, 50);
+
   dino.show();
-  // Dino
 
   if (!gameStarted) {
     return;
@@ -46,14 +52,23 @@ function draw() {
   if (gameOver) {
     return;
   }
+
+  //Update the base speed, limit the maximum speed
+  gameSpeed = min(gameSpeed + speedIncreaseRate, maxSpeed);
+
   dino.update();
 
-  // Obstacles
-  if (frameCount % 90 === 0) {
+  //Update obstacles
+  obstacleTimer += gameSpeed;
+
+  if (obstacleTimer > nextObstacleDistance) {
     obstacles.push(new Obstacle());
+    resetObstacleSpawn();
   }
 
-  for (let obs of obstacles) {
+  //Update and display obstacles
+  for (let i = obstacles.length - 1; i >= 0; i--) {
+    let obs = obstacles[i];
     obs.update();
     obs.show();
 
@@ -70,49 +85,72 @@ function draw() {
       fill(0);
       text("GAME OVER", width / 2 - 2, height / 2 - 2);
       text("GAME OVER", width / 2 + 2, height / 2 + 2);
+      console.log("Game speed:", gameSpeed);
       if (score > highScore) {
         highScore = score;
         highScoreEl.innerText = "HI " + highScore.toString().padStart(5, "0");
       }
       return;
     }
+
+    //Remove obstacles beyond the screen
+    if (obs.x + obs.w < 0) {
+      obstacles.splice(i, 1);
+    }
   }
 
   // Score update
-
   function formatScore(score) {
     return score.toString().padStart(5, "0");
   }
   if (millis() - lastScoreTime > 95) {
-    //every 100 ms
+    //every 95 milliseconds
     score += 1;
     scoreEl.innerText = formatScore(score);
     lastScoreTime = millis();
   }
 }
+
 function keyPressed() {
   if (key === " " || key === "ArrowUp") {
     if (!gameStarted) {
       gameStarted = true;
-      obstacles.push(new Obstacle()); // the first obstacle
+      obstacles.push(new Obstacle()); //first obstacle
       return;
     }
     if (gameOver) {
-      restartGame(); // If the game is over, restart it
+      restartGame(); //restart the game
       return;
     }
     dino.jump();
   }
 }
+
 function restartGame() {
-  // Скидаємо все і починаємо нову гру
   gameOver = false;
   score = 0;
   scoreEl.innerText = score.toString().padStart(5, "0");
   obstacles = [];
   dino = new Dino();
-  loop(); // Поновлюємо гру
+  gameSpeed = 6;
+  resetObstacleSpawn();
+  loop(); //restart draw ()
 }
+
+function resetObstacleSpawn() {
+  //Smooth increase in distance using the logarithmic function
+  let speedFactor = log(gameSpeed + 1);
+
+  let minGap = 210 + speedFactor * 25;
+  let maxGap = 750 + speedFactor * 25;
+
+  //Add random coefficient to minimum and maximum distance
+  let randomFactor = random(0.815, 1.311);
+  nextObstacleDistance = random(minGap, maxGap) * randomFactor;
+
+  obstacleTimer = 0;
+}
+
 class Dino {
   constructor() {
     this.r = 58;
@@ -158,13 +196,14 @@ class Dino {
     );
   }
 }
+
 class Obstacle {
   constructor() {
     this.w = 42;
     this.h = 58;
     this.x = width;
     this.y = groundY - this.h + 3;
-    this.speed = 6;
+    this.speed = gameSpeed;
   }
 
   update() {
@@ -176,13 +215,13 @@ class Obstacle {
   }
 }
 
-// Add collision library
+//Download pictures and fonts
 function preload() {
   dImg = loadImage("/public/assets/images/dino100.png");
   cImg = loadImage("/public/assets/images/cactus.png");
   fontC = loadFont("/public/fonts/Underdog/Underdog-Regular.ttf");
-  // p5 doesn't have built-in rect collision like this, so we'll use this quick hack:
+
   window.collideRectRect = function (x1, y1, w1, h1, x2, y2, w2, h2) {
-    return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h2 && y1 + h1 > y2;
+    return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h1 && y1 + h1 > y2;
   };
 }

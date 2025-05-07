@@ -17,3 +17,6 @@ Thumbs.db
 # SQLite DB (якщо вона генерується динамічно)
 *.sqlite
 *.sqlite3
+
+# Ignore SQLite database file
+/backend/database/dinoGame.db

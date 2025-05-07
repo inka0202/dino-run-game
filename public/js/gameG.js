@@ -86,10 +86,7 @@ function draw() {
       text("GAME OVER", width / 2 - 2, height / 2 - 2);
       text("GAME OVER", width / 2 + 2, height / 2 + 2);
       console.log("Game speed:", gameSpeed);
-      if (score > highScore) {
-        highScore = score;
-        highScoreEl.innerText = "HI " + highScore.toString().padStart(5, "0");
-      }
+
       return;
     }
 
@@ -108,6 +105,10 @@ function draw() {
     score += 1;
     scoreEl.innerText = formatScore(score);
     lastScoreTime = millis();
+  }
+  if (score > highScore) {
+    highScore = score;
+    highScoreEl.innerText = "HI " + highScore.toString().padStart(5, "0");
   }
 }
 
@@ -217,9 +218,16 @@ class Obstacle {
 
 //Download pictures and fonts
 function preload() {
-  dImg = loadImage("/public/assets/images/dino100.png");
-  cImg = loadImage("/public/assets/images/cactus.png");
-  fontC = loadFont("/public/fonts/Underdog/Underdog-Regular.ttf");
+  console.log("Loading images and fonts...");
+  dImg = loadImage("/assets/images/dino100.png", () => {
+    console.log("Dino image loaded");
+  });
+  cImg = loadImage("/assets/images/cactus.png", () => {
+    console.log("Cactus image loaded");
+  });
+  fontC = loadFont("/fonts/Underdog/Underdog-Regular.ttf", () => {
+    console.log("Font loaded");
+  });
 
   window.collideRectRect = function (x1, y1, w1, h1, x2, y2, w2, h2) {
     return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h1 && y1 + h1 > y2;

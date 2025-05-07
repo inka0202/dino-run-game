@@ -13,8 +13,7 @@
   background-color: #d8dfe5;
 }
 body {
-  background: url("/public/assets/images/background.png") no-repeat center
-    center fixed;
+  background: url("/assets/images/background.png") no-repeat center center fixed;
   background-size: cover;
   display: flex;
 
@@ -49,7 +48,6 @@ h1 {
 }
 .f {
   font-family: var(--font-main);
-  font-size: 1.9rem;
   user-select: none;
 }
 .btn {

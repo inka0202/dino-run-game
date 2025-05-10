@@ -4,8 +4,7 @@
   font-family: "Jersey 25";
   font-style: normal;
   font-weight: 400;
-  src: url("/public/fonts/Jersey/jersey-25-v3-latin-regular.woff2")
-    format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("/fonts/Jersey/jersey-25-v3-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* underdog-regular - latin */
@@ -14,8 +13,7 @@
   font-family: "Underdog";
   font-style: normal;
   font-weight: 400;
-  src: url("/public/fonts/Underdog/underdog-v23-latin-regular.woff2")
-    format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("/fonts/Underdog/underdog-v23-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 :root {
   --color-primary: #46656f;

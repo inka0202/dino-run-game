@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; object-src 'none';"
+    />
 
+    <link rel="stylesheet" type="text/css" href="css/gameG.css" />
+    <title>DINO RUN ACCOUNT| UwUverse</title>
+    <link
+      type="image/png"
+      sizes="96x96"
+      rel="icon"
+      href="/assets/images/icons8Dino96.png"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+    <script src="js/utils.js" defer></script>
+    <script src="js/gameA.js" defer></script>
+  </head>
+  <body>
+    <main id="game-container">
+      <div id="score-container">
+        <div id="highScoreDisplay">HI 00000</div>
+        <div>Score: <span id="score">00000</span></div>
+      </div>
+    </main>
+    <div class="info">
+      <p id="j">Press “Space” or “↑” to start the game</p>
+      <p id="u">
+        Welcome back, runner!🔥<br />
+        The dinos are waiting, the desert is endless — and it's time to run.<br />
+        Ready… Set… GO!
+      </p>
+      <a href="mode-select.html" class="login-hint">
+        Want to switch game mode? <strong>Choose how you want to play →</strong>
+      </a>
+    </div>
+    <div class="help-icon">
+      ?
+      <div class="tooltip">
+        <p>
+          <strong>1.</strong> Watch out! Jump over obstacles and stay alert ⚠️
+        </p>
+        <p>
+          <strong>2.</strong> Chase your best score and never stop running 🏃‍♂️💨
+        </p>
+        <p><strong>3.</strong> Press “Space” or “↑” to begin — good luck! 🎮</p>
+      </div>
+    </div>
+  </body>
+</html>

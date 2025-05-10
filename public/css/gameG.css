@@ -1,18 +1,15 @@
 @font-face {
   font-family: "Jersey 25";
   font-weight: 400;
-  src: url("/public/fonts/Jersey/jersey-25-v3-latin-regular.woff2")
-    format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("/fonts/Jersey/jersey-25-v3-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 @font-face {
   font-family: "Underdog";
   font-weight: 400;
-  src: url("/public/fonts/Underdog/underdog-v23-latin-regular.woff2")
-    format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("/fonts/Underdog/underdog-v23-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 body {
-  background: url("/public/assets/images/coners.png") no-repeat center center
-    fixed;
+  background: url("/assets/images/coners.png") no-repeat center center fixed;
   background-size: cover;
 
   margin: 0;
@@ -49,6 +46,12 @@ body {
   text-align: right;
   margin: 0rem 0rem 0rem 2.8rem;
 }
+#highScoreDisplay {
+  font-weight: 900;
+  user-select: none;
+  text-align: right;
+  margin: 0rem 0rem 0rem 2.8rem;
+}
 #game-container {
   position: relative;
   align-self: center;
@@ -61,6 +64,7 @@ body {
   max-width: 800px;
   text-align: center;
   align-self: center;
+  user-select: none;
 }
 #j {
   font-family: "Jersey 25";
@@ -73,4 +77,66 @@ body {
   font-size: 1.5rem;
   line-height: 1;
   margin: 2.5rem 2rem 0.5rem;
+}
+.login-hint {
+  display: inline-block;
+  margin: 1.5rem;
+
+  font-family: "Underdog";
+  color: #003366;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 1rem;
+
+  line-height: 1.4;
+
+  text-align: center;
+  user-select: none;
+  text-decoration: none;
+}
+
+.login-hint:hover {
+  color: #005ba6;
+  text-decoration: underline;
+}
+
+.help-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+
+  background-color: #9db5c0;
+  color: #000000;
+  font-weight: bold;
+  font-family: "Press Start 2P", sans-serif;
+  font-size: 1.5rem;
+
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  z-index: 999;
+  user-select: none;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 50px;
+  right: 0;
+  background-color: #f3f7fa;
+  color: #000;
+  padding: 15px;
+  border-radius: 5px;
+  font-family: "Underdog";
+  font-size: 0.9rem;
+  width: 260px;
+  display: none;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
+}
+
+.help-icon:hover .tooltip {
+  display: block;
 }

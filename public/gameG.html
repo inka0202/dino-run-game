@@ -3,10 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self'; object-src 'none';"
+    />
+
     <link rel="stylesheet" type="text/css" href="css/gameG.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
     <script src="js/gameG.js" defer></script>
     <title>DINO RUN GUEST | UwUverse</title>
+    <link
+      type="image/png"
+      sizes="96x96"
+      rel="icon"
+      href="/assets/images/icons8Dino96.png"
+    />
   </head>
   <body>
     <main id="game-container">
@@ -21,6 +32,21 @@
         You're playing as Guest.<br />
         High Score will reset after this session.
       </p>
+      <a href="login.html" class="login-hint">
+        Want to save your high score? <br /><strong>Log in now →</strong>
+      </a>
+    </div>
+    <div class="help-icon">
+      ?
+      <div class="tooltip">
+        <p>
+          <strong>1.</strong> Watch out! Jump over obstacles and stay alert ⚠️
+        </p>
+        <p>
+          <strong>2.</strong> Chase your best score and never stop running 🏃‍♂️💨
+        </p>
+        <p><strong>3.</strong> Press “Space” or “↑” to begin — good luck! 🎮</p>
+      </div>
     </div>
   </body>
 </html>

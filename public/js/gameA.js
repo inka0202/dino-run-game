@@ -19,9 +19,18 @@ fetch("http://localhost:5000/api/score", {
     return res.json();
   })
   .then((data) => {
+    setTimeout(() => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("highScore");
+      alert("Session expired. Please log in again.");
+      window.location.href = "login.html";
+    }, 30 * 60 * 1000); // 30 хвилин
+
     document.getElementById("highScoreDisplay").innerText =
       "HI " + data.high_score.toString().padStart(5, "0");
     highScore = data.high_score;
+
+    //start auto-delete token after 30 minutes
   })
   .catch((err) => {
     console.error("Failed to load score", err);
@@ -168,7 +177,6 @@ function endGame(finalScore) {
     })
     .catch((err) => {
       console.error("Failed to send or fetch score", err);
-      alert("Failed to save or reload your score.");
     });
 }
 

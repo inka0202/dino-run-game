@@ -9,13 +9,13 @@ exports.saveScore = async (req, res) => {
   }
 
   try {
-    // Отримуємо поточний high_score
+    //Get the current high_score
     const row = await db.get("SELECT high_score FROM users WHERE id = ?", [
       userId
     ]);
     const currentScore = row?.high_score || 0;
 
-    // Оновлюємо тільки якщо новий score більший
+    //update only if the new score is larger
     if (score > currentScore) {
       await db.run("UPDATE users SET high_score = ? WHERE id = ?", [
         score,

@@ -5,16 +5,16 @@ const db = require("../database/db");
 exports.register = async (req, res) => {
   const { email, password } = req.body;
 
-  // Валідація довжини
+  //Length validation
   if (!email || !password || email.length > 50 || password.length > 100) {
     return res.status(400).json({ message: "Invalid input length." });
   }
-  // SQL Injection/небезпечні символи
+  //SQL Injection/dangerous characters
   const dangerous = /(\b(drop|select|insert|delete|update)\b|--|;)/i;
   if (dangerous.test(email)) {
     return res.status(400).json({ message: "Invalid characters in input." });
   }
-  // Валідація email та пароля (RegExp)
+  //Validation of email and password (RegExp)
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
@@ -28,8 +28,9 @@ exports.register = async (req, res) => {
     });
   }
 
-  console.log("REGISTER HIT:", email); // <--- додай
-  // Перевірка, чи існує юзер
+  console.log("REGISTER HIT:", email);
+  //check if the user exists
+
   try {
     const user = await db.get("SELECT * FROM users WHERE email = ?", [email]);
 

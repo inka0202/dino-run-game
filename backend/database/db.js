@@ -2,10 +2,11 @@ const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
 const fs = require("fs");
 
-// Шлях до файлу бази даних (цей файл буде створений автоматично, якщо його ще немає)
+//Path to the database file (this file will be created automatically if it does not already exist)
+
 const dbPath = path.resolve(__dirname, "dinoGame.db");
 
-// Підключення до SQLite бази даних
+//Connection to SQLite database
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error("Failed to connect to database:", err.message);
@@ -14,11 +15,11 @@ const db = new sqlite3.Database(dbPath, (err) => {
   }
 });
 
-// Читання SQL схеми з файлу schema.sql
+//Reading SQL schema from schema.sql file
 const schemaPath = path.resolve(__dirname, "schema.sql");
 const schema = fs.readFileSync(schemaPath, "utf8");
 
-// Виконання SQL-скрипта для створення таблиць
+//Execute SQL script to create tables
 db.exec(schema, (err) => {
   if (err) {
     console.error("Error initializing database schema:", err.message);
@@ -27,11 +28,12 @@ db.exec(schema, (err) => {
   }
 });
 
-// Обгортка в проміси для зручності (не обов'язково, але корисно для async/await)
+//Wrapper in proms for convenience (not necessary, but useful for async/await)
+
 const { promisify } = require("util");
 db.run = promisify(db.run);
 db.get = promisify(db.get);
 db.all = promisify(db.all);
 
-// Експортуємо базу даних для використання в інших частинах програми
+//Export the database for use in other parts of the application
 module.exports = db;

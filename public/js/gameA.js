@@ -24,7 +24,7 @@ fetch("http://localhost:5000/api/score", {
       localStorage.removeItem("highScore");
       alert("Session expired. Please log in again.");
       window.location.href = "login.html";
-    }, 30 * 60 * 1000); // 30 хвилин
+    }, 30 * 60 * 1000); //30 minutes
 
     document.getElementById("highScoreDisplay").innerText =
       "HI " + data.high_score.toString().padStart(5, "0");
